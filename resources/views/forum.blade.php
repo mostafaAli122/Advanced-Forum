@@ -5,16 +5,22 @@
    @foreach($discussions as $d)
         <div class="card">
             <div class="card-header">
-                <img src="{{ $d->user->avatar}}" alt="" width="70px" hight="70px" >
+                <img src="{{ $d->user->avatar}}" alt="" width="40px" hight="40px" >&nbsp;&nbsp;&nbsp;
+                <span>{{ $d->user->name}}, <b>{{$d->created_at->diffForHumans()}} </b> </span>
+                <a href="{{ route('discussion',['slug'=>$d->slug])}}" class="btn btn-default float-right">View</a>
             </div>
 
             <div class="card-body">
-                {{$d->content}}
+                <h6 class="text-center"><b>{{$d->title}}</b></h6>
+                <p class="text-center">{{str_limit($d->content,50)}}</p>
+            </div>
+            <div class="card-footer">
+                <p>{{$d->replies->count()}}Replies</p>
             </div>
         </div>
    @endforeach  
 
-   <div class="text-center">
+   <div class="float-center">
         {{$discussions->links()}}
    </div>  
 @endsection

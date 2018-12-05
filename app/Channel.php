@@ -8,6 +8,6 @@ class Channel extends Model
 {
     protected $fillable=['title'];
     public function discussions(){
-        $this->hasMany('App\Discussion');
+      return  $this->hasMany('App\Discussion');
     }
 }
