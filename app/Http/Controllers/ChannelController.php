@@ -81,7 +81,7 @@ class ChannelController extends Controller
         $channel->save();
         Session::flash('success','Channel Updated Successfully .');
         return redirect()->route('channels.index');
-    };
+    }
 
 
     /**

@@ -72,9 +72,21 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="container">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Channels</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            @foreach($channels as $channel)
+                                <li class="list-group-item">{{$channel->title}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
             @yield('content')
-        </main>
+        </div>
     </div>
 </body>
 </html>
