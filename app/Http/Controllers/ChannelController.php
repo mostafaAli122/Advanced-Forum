@@ -39,7 +39,8 @@ class ChannelController extends Controller
             'channel'=>'required'
         ]);
         Channel::create([
-            'title'=>$request->channel
+            'title'=>$request->channel,
+            'slug'=>str_slug($request->channel);
         ]);
         Session::flash('success','Channel Successfully Created .');
         return redirect()->route('channels.index');
@@ -78,6 +79,7 @@ class ChannelController extends Controller
     {
         $channel=Channel::find($id);
         $channel->title=$request->channel;
+        $channel->slug=str_slug($request->channel);
         $channel->save();
         Session::flash('success','Channel Updated Successfully .');
         return redirect()->route('channels.index');

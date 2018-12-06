@@ -26,6 +26,14 @@ Route::get('/{provider}/redirect',[
     'uses'=>'SocialsController@auth_callback',
     'as'=>'social.callback'
 ]);
+Route::get('discussion/{slug}',[
+    'uses' => 'DiscussionController@show',
+    'as' => 'discussion'
+]);
+Route::get('channel/{slug}',[
+    'uses'=>'ForumsController@channel',
+    'as' => 'channel'
+]);
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('channels','ChannelController');
 
@@ -37,10 +45,7 @@ Route::group(['middleware'=>'auth'],function(){
         'uses'=>'DiscussionController@store',
         'as'=>'discussions.store'
     ]);
-    Route::get('discussion/{slug}',[
-        'uses' => 'DiscussionController@show',
-        'as' => 'discussion'
-    ]);
+ 
     Route::post('discussion/reply/{id}',[
         'uses'=>'DiscussionController@reply',
         'as'=>'discussion.reply'
