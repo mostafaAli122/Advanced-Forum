@@ -18,7 +18,7 @@
                 <p>{{$d->replies->count()}}Replies</p>
             </div>
         </div>
-   @endforeach  
+   @endforeach
 
    <div class="float-center">
         {{$discussions->links()}}

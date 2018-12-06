@@ -6,7 +6,6 @@ use Auth;
 use App\Reply;
 use Session;
 
-use Auth;
 use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
