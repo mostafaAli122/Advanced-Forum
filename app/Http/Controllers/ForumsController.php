@@ -13,6 +13,6 @@ class ForumsController extends Controller
     } 
     public function channel{
         $channel =Channel::where('slug',$slug)->first();
-        return view('channel')->with('discussions',$channel->discussions);
+        return view('channel')->with('discussions',$channel->discussions()->paginate(5));
     }
 }

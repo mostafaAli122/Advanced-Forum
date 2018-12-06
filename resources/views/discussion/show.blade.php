@@ -5,7 +5,11 @@
             <div class="card-header">
                 <img src="{{ $d->user->avatar}}" alt="" width="40px" hight="40px" >&nbsp;&nbsp;&nbsp;
                 <span>{{ $d->user->name}}, <b>{{$d->created_at->diffForHumans()}} </b> </span>
-                <a href="{{ route('discussion',['slug'=>$d->slug])}}" class="btn btn-default float-right">View</a>
+                    @if($d->is_being_watched_by_auth_user())
+                        <a href="{{ route('discussion.unwatch',['id'=>$d->id])}}" class="btn btn-default btn-xs float-right">Unwatch</a>
+                    @else
+                        <a href="{{ route('discussion.watch',['id'=>$d->id])}}" class="btn btn-default btn-xs float-right">Watch</a>
+                    @endif
             </div>
 
             <div class="card-body">
@@ -13,7 +17,8 @@
                <hr> <p class="text-center">{{$d->content}}</p>
             </div>
             <div class="card-footer">
-                <p>{{$d->replies->count()}}Replies</p>
+                <span>{{$d->replies->count()}}Replies</span>
+                <a href="{{ route('channel',['slug'=>$d->channel->slug])}} " class="float-right btn btn-default btn-xs">{{$d->channel->title}}</a>
             </div>
         </div>
         @foreach($d->replies as $r)
@@ -37,16 +42,20 @@
         @endforeach
         <div class="card">
             <div class="card-body">
-                <form action="{{route('discussion.reply',['id'=>$d->id])}}" method="post">
-                    {{csrf_field()}}
-                    <div class="form-group">
-                        <label for="reply">Leave a Reply</label>
-                        <textarea name="reply" id="reply" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn float-right">Reply</button>     
-                    </div>
-                </form>
+                @if(Auth::check())
+                    <form action="{{route('discussion.reply',['id'=>$d->id])}}" method="post">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <label for="reply">Leave a Reply</label>
+                            <textarea name="reply" id="reply" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn float-right">Reply</button>     
+                        </div>
+                    </form>
+                @else
+                    <div class="float-center"><h2>Sign In To Reply</h2> </div>
+                @endif
             </div>
         </div>
 @endsection

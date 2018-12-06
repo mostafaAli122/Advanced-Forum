@@ -15,10 +15,14 @@
                 <p class="text-center">{{str_limit($d->content,50)}}</p>
             </div>
             <div class="card-footer">
-                <p>{{$d->replies->count()}}Replies</p>
+                <span>{{$d->replies->count()}}Replies</span>
+                <a href="{{ route('channel',['slug'=>$d->channel->slug])}} " class="float-right btn btn-default btn-xs">{{$d->channel->title}}</a>
             </div>
+                        
         </div>
    @endforeach
 
- 
+   <div class="float-center">
+        {{$discussions->links()}}
+   </div>  
 @endsection
