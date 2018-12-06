@@ -18,6 +18,6 @@ class SocialsController extends Controller
             $user->name=$details->full_name;
             $user->save();
         });
-        return redirect('/home');
+        return redirect('/forum');
 }
 }

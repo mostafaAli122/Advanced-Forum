@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Discussion;
+use Auth;
+use App\Reply;
 use Session;
+
 use Auth;
 use Illuminate\Http\Request;
 
@@ -31,5 +34,15 @@ class DiscussionController extends Controller
     public function show($slug){
         $discussion=Discussion::where('slug',$slug)->first();
         return view('discussion.show')->with('d',$discussion);
+    }
+    public function reply($id){
+        $discussion=Discussion::find($id);
+        $reply=Reply::create([
+            'user_id'=>Auth::id(),
+            'discussion_id'=>$id,
+            'content'=>request()->reply
+        ]);
+        Session::flash('success',' Successfully Reply To The Discussion.');
+        return redirect()->back();
     }
 }

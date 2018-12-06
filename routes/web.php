@@ -41,4 +41,8 @@ Route::group(['middleware'=>'auth'],function(){
         'uses' => 'DiscussionController@show',
         'as' => 'discussion'
     ]);
+    Route::post('discussion/reply/{id}',[
+        'uses'=>'DiscussionController@reply',
+        'as'=>'discussion.reply'
+    ]);
 });
