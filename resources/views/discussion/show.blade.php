@@ -41,7 +41,7 @@
                 <div class="card-header">
                     <img src="{{ $r->user->avatar}}" alt="" width="40px" hight="40px" >&nbsp;&nbsp;&nbsp;
                     <span>{{ $r->user->name}}, <b>{{$r->created_at->diffForHumans()}} </b> </span>
-                    @if(!$best_answer)
+                    @if(!$best_answer && Auth::id()==$d->user->id)
                         <a href="{{ route('discussion.best.answer',['id'=>$r->id])}} " class="btn btn-xs btn-info float-right">Mark as best answer</a>
                     @endif
                 </div>

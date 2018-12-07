@@ -15,7 +15,7 @@
                 {{csrf_field}}
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" name="title" class="form-group">
+                    <input type="text" name="title" value="{{old('title')}} " class="form-group">
                 </div>
                 <div class="form-group">
                     <label for="channel" class="form-control">Pick a Channel</label>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label for="content">Ask a question</label>
-                    <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="content" id="content" cols="30" rows="10" class="form-control">{{old('content')}}</textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success pull-right" type="submit">Creaate a Discussion</button>
