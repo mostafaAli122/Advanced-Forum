@@ -33,19 +33,22 @@ class DiscussionController extends Controller
     }
     public function show($slug){
         $discussion=Discussion::where('slug',$slug)->first();
-        return view('discussion.show')->with('d',$discussion);
+        $best_answer=$discussion->replies()->where('best_answer',1)->first();
+        return view('discussion.show')->with('d',$discussion)
+                                      ->with('best_answer',$best_answer);
     }
     public function reply($id){
         $discussion=Discussion::find($id);
-        $reply=Reply::create([
+
+        Reply::create([
             'user_id'=>Auth::id(),
             'discussion_id'=>$id,
             'content'=>request()->reply
         ]);
-        $watchers=array();
-        foreach($discussion->watchers as $watcher)
-            array_push($watchers,User::find($watcher->user_id));
-        Notification::send($watchers,new \App\Notifications\NewReplyAdded($discussion));
+       $watchers=array();
+       foreach($discussion->watchers as $watcher)
+           array_push($watchers,User::find($watcher->user_id));
+       Notification::send($watchers,new \App\Notifications\NewReplyAdded($discussion));
 
         Session::flash('success',' Successfully Reply To The Discussion.');
         return redirect()->back();
