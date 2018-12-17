@@ -50,6 +50,15 @@ Route::group(['middleware'=>'auth'],function(){
         'uses'=>'DiscussionController@reply',
         'as'=>'discussion.reply'
     ]);
+    Route::get('/discussion/edit/{slug}',[
+        'uses'=>'DiscussionController@edit',
+        'as' =>'discussion.edit'
+    ]);
+     Route::get('/discussion/update/{id}',[
+        'uses'=>'DiscussionController@update',
+        'as' =>'discussion.update'
+    ]);
+
     Route::get('/reply/like/{id}',[
         'uses' =>'RepliesController@like',
         'as' => 'reply.like'

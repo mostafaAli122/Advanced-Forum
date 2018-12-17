@@ -53,4 +53,18 @@ class DiscussionController extends Controller
         Session::flash('success',' Successfully Reply To The Discussion.');
         return redirect()->back();
     }
+
+    public function edit($slug){
+        return view('discussion.edit',['discussion'=>Discussion::where('slug',$slug)->first()])
+    }
+    public function update($id){
+        $this->validate(request(),[
+            'content' => 'required'
+        ]);
+        $d=Discussion::find(id);
+        $d->content=request()->content;
+        $d->save();
+        Session::flash('success',' Successfully Updated The Discussion.');
+        return redirect()->route('discussion',['slug'=>$d->slug])
+    }
 }
