@@ -27,7 +27,7 @@
 
             <div class="card-body">
                 <h6 class="text-center"><b>{{$d->title}}</b></h6>
-               <hr> <p class="text-center">{{$d->content}}</p>
+               <hr> <p class="text-center">{!! Markdown::convertToHtml($d->content) !!}</p>
                <hr>
                @if($best_answer)
                     <div class="text-center" style="padding:40px">

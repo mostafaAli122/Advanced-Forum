@@ -1,0 +1,9 @@
+using "markdown" compiler to see markdown text when display the discussion
+
+URL::https://github.com/GrahamCampbell/Laravel-Markdown
+
+//////////////////
+use hightlight.js to format code (put some style to code in our discussion content )
+
+URL::https://cdnjs.com/libraries/hightlight.js/
+     https://highlightjs.org/usage/
