@@ -5,11 +5,18 @@
             <div class="card-header">
                 <img src="{{ $d->user->avatar}}" alt="" width="40px" hight="40px" >&nbsp;&nbsp;&nbsp;
                 <span>{{ $d->user->name}}, <b>{{$d->created_at->diffForHumans()}} </b> </span>
-                    @if($d->is_being_watched_by_auth_user())
-                        <a href="{{ route('discussion.unwatch',['id'=>$d->id])}}" class="btn btn-default btn-xs float-right">Unwatch</a>
-                    @else
-                        <a href="{{ route('discussion.watch',['id'=>$d->id])}}" class="btn btn-default btn-xs float-right">Watch</a>
-                    @endif
+
+                @if($d->hasBestAnswer())
+                    <span class="btn btn float-rigth bnt-success btn-xs">Closed</span>
+                @else
+                    <span class="btn btn float-rigth bnt-danger btn-xs">Open</span>
+                @endif
+
+                @if($d->is_being_watched_by_auth_user())
+                    <a href="{{ route('discussion.unwatch',['id'=>$d->id])}}" class="btn btn-default btn-xs float-right" style="margin-right:8px;">Unwatch</a>
+                @else
+                    <a href="{{ route('discussion.watch',['id'=>$d->id])}}" class="btn btn-default btn-xs float-right" style="margin-right:8px;">Watch</a>
+                @endif
             </div>
 
             <div class="card-body">
