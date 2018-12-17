@@ -13,9 +13,11 @@
                 @endif
                 
                 @if(Auth::id()==$d->user->id)
-                    <a href="{{ route('discussion.edit',['slug'=>$d->slug])}}" class="btn btn-info btn-xs float-right" style="margin-right:8px;">Edit</a>
+                    @if(!$d->hasBestAnswer())
+                        <a href="{{ route('discussion.edit',['slug'=>$d->slug])}}" class="btn btn-info btn-xs float-right" style="margin-right:8px;">Edit</a>
+                    @endif
                 @endif
-                
+
                 @if($d->is_being_watched_by_auth_user())
                     <a href="{{ route('discussion.unwatch',['id'=>$d->id])}}" class="btn btn-default btn-xs float-right" style="margin-right:8px;">Unwatch</a>
                 @else
@@ -53,7 +55,13 @@
                     <img src="{{ $r->user->avatar}}" alt="" width="40px" hight="40px" >&nbsp;&nbsp;&nbsp;
                     <span>{{ $r->user->name}}, <b>{{$r->created_at->diffForHumans()}} </b> </span>
                     @if(!$best_answer && Auth::id()==$d->user->id)
-                        <a href="{{ route('discussion.best.answer',['id'=>$r->id])}} " class="btn btn-xs btn-info float-right">Mark as best answer</a>
+                        <a href="{{ route('discussion.best.answer',['id'=>$r->id])}} " class="btn btn-xs btn-primary float-right" style="margin-left:8px;">Mark as best answer</a>
+                    @endif
+                    <!--show edit reply button to user who created it -->
+                    @if(Auth::id()==$r->user->id)
+                        @if(!$r->best_answer)
+                            <a href="{{ route('reply.edit',['id'=>$r->id])}} " class="btn btn-xs btn-info float-right">Edit </a>
+                        @endif
                     @endif
                 </div>
 

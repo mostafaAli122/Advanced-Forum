@@ -79,5 +79,13 @@ Route::group(['middleware'=>'auth'],function(){
         'uses'=>'RepliesController@best_answer',
         'as' =>'discussion.best.answer'
     ]);
+    Route::get('/reply/edit/{id}',[
+        'uses'=>'RepliesController@edit',
+        'as' =>'reply.edit'
+    ]);
+     Route::get('/reply/update/{id}',[
+        'uses'=>'RepliesController@update',
+        'as' =>'reply.update'
+    ]);
     
 });
