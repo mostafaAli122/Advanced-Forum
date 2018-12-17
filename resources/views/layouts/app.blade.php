@@ -107,6 +107,16 @@
                             </ul>
                         </div>
                     </div>
+                    @if(Auth::check() && Auth::user()->adim)
+                        <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="/channels" style="text-decoration:none;">All Channels</a>
+                                    </li>
+                                </ul>
+                        </div>
+                    @endif
+
                     <div class="card">
                         <div class="card-header">Channels</div>
                         <div class="card-body">
