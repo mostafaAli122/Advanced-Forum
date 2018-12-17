@@ -38,7 +38,7 @@
                                 <span>{{ $best_answer->user->name}}</span>
                             </div>
                             <div class="panel-body">
-                                {{$best_answer->content}}
+                            {!! Markdown::convertToHtml($best_answer->content) !!}
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="card-body">
-                    <p class="text-center">{{$r->content}}</p>
+                    <p class="text-center">{!! Markdown::convertToHtml($r->content) !!}</p>
                 </div>
                 <div class="card-footer">
                     @if($r->is_liked_by_auth_user())
